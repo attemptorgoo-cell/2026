@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "未命名 1/CPU_simplified.md",
+                "file": "routine/00_git.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "CPU_simplified"
+              "title": "00_git"
             }
           }
         ]
@@ -185,8 +185,8 @@
   },
   "active": "0f35de5e212d4bd3",
   "lastOpenFiles": [
-    "routine/03_19.md",
     "未命名 1/CPU_simplified.md",
+    "routine/03_19.md",
     "未命名 1",
     "未命名"
   ]
