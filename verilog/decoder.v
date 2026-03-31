@@ -1,5 +1,5 @@
 module decoder(
-    input 
+
 );
 
 endmodule
