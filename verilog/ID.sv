@@ -19,9 +19,15 @@ decoder myDecoder(
 
 assign id_ex_bus.alu_op = decode_out.alu_op;
 assign id_ex_bus.we     = decode_out.we;
+assign id_ex_bus.rd     = decode_out.rd;
+
+assign id_ex_bus.rs1    = decode_out.rs1;
+assign id_ex_bus.rs2    = decode_out.rs2;
+
 
 regFiles myRf(
 .clk(clk),
+.rst(rst),
 .rs1(decode_out.rs1),
 .rs2(decode_out.rs2),
 .rd(wb_id_bus.rd),

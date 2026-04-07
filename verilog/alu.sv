@@ -1,10 +1,10 @@
 module alu(
     input logic [3:0] alu_op,
-
     input logic [31:0] A,
     input logic [31:0] B,
     output logic [31:0] C
 );
+//alu需要判断数据是不是被更新了的
 
 always_comb begin
     case(alu_op)
