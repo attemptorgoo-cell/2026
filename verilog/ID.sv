@@ -24,6 +24,13 @@ assign id_ex_bus.rd     = decode_out.rd;
 assign id_ex_bus.rs1    = decode_out.rs1;
 assign id_ex_bus.rs2    = decode_out.rs2;
 
+assign id_ex_bus.imm_we = decode_out.imm_we; //I型指令
+assign id_ex_bus.imm    = decode_out.imm; 
+
+
+assign id_ex_bus.memory_we = decode_out.memory_we;
+assign id_ex_bus.memory_re = decode_out.memory_re;
+assign id_ex_bus.func3     = decode_out.func3;
 
 regFiles myRf(
 .clk(clk),

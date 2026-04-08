@@ -23,11 +23,11 @@ assign rdata2 = (rs2 == 0)? 32'd0 : regs[rs2];
 always_ff @(posedge clk) begin
     if(~rst) begin
     for (int i = 0 ; i < 32; i++) regs[i] = 0;
-    regs[1] = 32'd1; // 给 x1 塞个 10
-    regs[2] = 32'd2; // 给 x2 塞个 20
+    // regs[1] = 32'd1; // 给 x1 塞个 10
+    // regs[2] = 32'd2; // 给 x2 塞个 20
     end else 
     if(we) begin
-    regs[rd] <= wdata;
+    regs[rd] <= (rd == 0)? 32'd0 : wdata;
     end
 end
 

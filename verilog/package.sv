@@ -6,8 +6,16 @@ typedef struct packed {
     logic [4:0] rd;      
     logic [3:0] alu_op;
     logic we;     //这条指令最终要不要写回
+
+    logic imm_we;        //是否使用了立即数
+    logic [31:0] imm;    
+
+    logic memory_we;
+    logic memory_re;
+    logic [2:0] func3;
+
 } decode_out_t;  
-//不需要记录位宽，使用t.rd的方式访问
+//使用t.rd的方式访问
 
 typedef struct packed {
     logic [31:0] instr;
@@ -21,8 +29,16 @@ typedef struct packed {
     logic [4:0] rs2;
     logic [4:0] rd;
     logic [3:0] alu_op;
+
+    logic we;
+
+    logic imm_we;
+    logic [31:0] imm;       //立即数生成
     
-    logic we; 
+    logic memory_we;
+    logic memory_re;
+    logic [2:0] func3;
+
 } id_ex_bus_t;  //t means type
 
 typedef struct packed {
@@ -34,6 +50,11 @@ typedef struct packed {
     logic [4:0] rs2;
 
     logic we;
+
+    logic memory_we;
+    logic memory_re;
+    logic [2:0] func3;
+
 } ex_mem_bus_t;
 
 typedef struct packed {
@@ -65,5 +86,14 @@ typedef struct packed {
     logic [31:0] w_data;
     logic we;
 }  mem_ex_bus_t;
+
+
+//内存bus
+typedef struct packed {
+    logic [31:0] addr;
+    logic memory_we;
+    logic memory_re;
+
+} memory_bus_t;
 
 endpackage
