@@ -17,20 +17,29 @@ decoder myDecoder(
 .decode_out(decode_out)
 );
 
-assign id_ex_bus.alu_op = decode_out.alu_op;
-assign id_ex_bus.we     = decode_out.we;
-assign id_ex_bus.rd     = decode_out.rd;
 
-assign id_ex_bus.rs1    = decode_out.rs1;
-assign id_ex_bus.rs2    = decode_out.rs2;
+assign id_ex_bus.pc        = if_id_bus.pc;
+assign id_ex_bus.is_auipc  = decode_out.is_auipc;
+assign id_ex_bus.is_branch = decode_out.is_branch;
+assign id_ex_bus.is_jal    = decode_out.is_jal;
+assign id_ex_bus.is_jalr   = decode_out.is_jalr;
 
-assign id_ex_bus.imm_we = decode_out.imm_we; //I型指令
-assign id_ex_bus.imm    = decode_out.imm; 
+assign id_ex_bus.alu_op    = decode_out.alu_op;
+assign id_ex_bus.we        = decode_out.we;
+assign id_ex_bus.rd        = decode_out.rd;
+
+assign id_ex_bus.rs1       = decode_out.rs1;
+assign id_ex_bus.rs2       = decode_out.rs2;
+
+
+assign id_ex_bus.imm_we    = decode_out.imm_we; //I型指令
+assign id_ex_bus.imm       = decode_out.imm; 
 
 
 assign id_ex_bus.memory_we = decode_out.memory_we;
 assign id_ex_bus.memory_re = decode_out.memory_re;
 assign id_ex_bus.func3     = decode_out.func3;
+
 
 regFiles myRf(
 .clk(clk),

@@ -18,6 +18,7 @@ always_comb begin
     4'b0111:    C = $signed(A) >>> B[4:0];     //sra右移
     4'b1000:    C = ($signed(A) < $signed(B)) ? 1 : 0;    //有符号数比较大小
     4'b1001:    C = (A < B) ? 1 : 0;                      //无符号数比较大小
+    default:    C = 32'b0;
     endcase
 end
 

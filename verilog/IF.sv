@@ -2,6 +2,7 @@ import my_riscv_pkg::*;
 module IF(
     input logic clk,
     input logic rst,
+    input ex_if_bus_t ex_if_bus,
     output if_id_bus_t if_id_bus
 );
 logic [31:0] pc;
@@ -19,10 +20,28 @@ always_ff @(posedge clk or negedge rst)begin
     if(rst == 1'b0)begin
         pc <= 32'b0;
         start_flag <= 1'b1;
+        if_id_bus <= '0;
     end
     else if(start_flag == 1'b1)begin
-        if_id_bus.instr <= rom[pc[11:2]];
-        pc <= pc + 32'd4; 
+        // if(ex_if_bus.branch_sign)begin
+        //     if_id_bus.instr <= rom[ex_if_bus.pc_branch[11:2]];
+        //给当前指令，而不是下一条指令
+        //     if_id_bus.pc <= ex_if_bus.pc_branch;
+        //     pc <= ex_if_bus.pc_branch + 32'd4;
+        //     //如果不加4，会让下一个指令取相同的，必须要加'd4
+        // end else begin
+
+        if(ex_if_bus.branch_sign)begin
+            pc <= ex_if_bus.pc_branch;              //下一条指令
+        end else begin
+            pc <= pc + 32'd4; 
+        end
+//如果说要跳转，则当前这一行指令也不会触发，所以给id的pc为0
+        if_id_bus.instr <= (ex_if_bus.branch_sign) ? 32'b0 : 
+                                                     rom[pc[11:2]];      //给当前指令
+        if_id_bus.pc    <= (ex_if_bus.branch_sign) ? 32'b0 :
+                                                     pc;                 //给当前pc
+            
     end
 end
 
